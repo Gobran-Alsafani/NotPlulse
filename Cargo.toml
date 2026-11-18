@@ -1,0 +1,36 @@
+[package]
+name = "netpulse-tray"
+version = "1.0.0"
+edition = "2021"
+authors = ["NetPulse Contributors"]
+description = "Ultra-lightweight Windows System Tray internet download and upload speed monitor."
+license = "MIT"
+
+[[bin]]
+name = "netpulse"
+path = "src/main.rs"
+
+[dependencies]
+tray-icon = "0.26"
+winit = "0.30"
+winreg = "0.56"
+
+[dependencies.windows]
+version = "0.62"
+features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Dwm",
+    "Win32_Graphics_Gdi",
+    "Win32_NetworkManagement_IpHelper",
+    "Win32_NetworkManagement_Ndis",
+    "Win32_System_LibraryLoader",
+    "Win32_UI_Controls",
+    "Win32_UI_WindowsAndMessaging",
+]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
